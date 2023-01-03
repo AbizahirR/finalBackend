@@ -30,18 +30,18 @@ const getItem = async (req, res) => {
 }
 
 const createItem = async (req, res) => {
-        const IMAGE_UPLOAD_DIR = './public/uploads'
+        const IMAGE_UPLOAD_DIR = '/'
         let form = new multiparty.Form({uploadDir: IMAGE_UPLOAD_DIR})
         const allowedForm = ["jpg", "png", "gif", "jpeg"]
 
         form.parse(req, async (err, fields, files) => {
             if (err) return res.send({err: err.message})
             let { name, desc, price, stock} = fields
+            console.log(files.img[0].path.split('uploads\\').pop());
             const img = files ? `https://finalbackend-pa73.onrender.com/uploads/${files.img[0].path.split('uploads\\').pop()}` : null
             if (!name || !desc || !price || !stock || !img) return res.send({error: 'Invalid Data'}).status(400).end()
             name = name[0], desc = desc[0], price = price[0], stock = stock[0]
-
-            console.log(img.split(".").pop());
+            console.log(img);
             if (!allowedForm.includes(img.split(".").pop())) {
                 return res.send({error: "Formato de imagen invalido"})
             }
