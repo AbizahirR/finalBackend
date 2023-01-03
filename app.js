@@ -10,6 +10,10 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.static('public'))
 
+app.get("/", (req, res) => {
+    res.send({funcionando: "true"})
+})
+
 app.use('/api/1.0', require('./app/routes'))
 
 const port = process.env.PORT
