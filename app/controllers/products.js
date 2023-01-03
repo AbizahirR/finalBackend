@@ -37,10 +37,11 @@ const createItem = async (req, res) => {
         form.parse(req, async (err, fields, files) => {
             if (err) return res.send({err: err.message})
             let { name, desc, price, stock} = fields
-            const img = files ? `https://finalbackend-pa73.onrender.com/${files.img[0].path.split('uploads\\').pop()}` : null
+            const img = files ? `http://localhost:3000/uploads/${files.img[0].path.split('uploads\\').pop()}` : null
             if (!name || !desc || !price || !stock || !img) return res.send({error: 'Invalid Data'}).status(400).end()
             name = name[0], desc = desc[0], price = price[0], stock = stock[0]
 
+            console.log(img.split(".").pop());
             if (!allowedForm.includes(img.split(".").pop())) {
                 return res.send({error: "Formato de imagen invalido"})
             }
