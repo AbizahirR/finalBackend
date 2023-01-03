@@ -30,7 +30,7 @@ const getItem = async (req, res) => {
 }
 
 const createItem = async (req, res) => {
-        const IMAGE_UPLOAD_DIR = './uploads'
+        const IMAGE_UPLOAD_DIR = './public/uploads'
         let form = new multiparty.Form({uploadDir: IMAGE_UPLOAD_DIR})
         const allowedForm = ["jpg", "png", "gif", "jpeg"]
 
